@@ -51,4 +51,5 @@ class Controller:
           self.player.stop(RIGHT)
 
   def update(self):
+    self.screen.fill((0, 0, 0))
     self.player.update()
