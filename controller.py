@@ -2,13 +2,12 @@ import pygame as pg
 from player import Player
 
 MOVEMENTS = {
-  pg.K_w: ( 0, -1 ),
-  pg.K_s: ( 0, 1 ),
-  pg.K_a: ( -1, 0 ),
-  pg.K_d: ( 1, 0 )
+  pg.K_a: -1,
+  pg.K_d: 1
 }
 
 CLOCK = pg.time.Clock()
+PLAYER_SIZE = 40
 
 class Controller:
   def __init__(self, caption, size):
@@ -17,7 +16,7 @@ class Controller:
     self.screen = pg.display.set_mode(size)
     self.done = False
 
-    self.player = Player((10, 10), (100, 100), 3, './assets/Koala.jpg', self.screen)
+    self.player = Player((10, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 5, './assets/Koala.jpg', self.screen)
 
   def run(self):
     while not self.done:
