@@ -7,7 +7,7 @@ MOVEMENTS = {
 }
 
 CLOCK = pg.time.Clock()
-PLAYER_SIZE = 40
+PLAYER_SIZE = 50
 
 class Controller:
   def __init__(self, caption, size):
@@ -16,7 +16,7 @@ class Controller:
     self.screen = pg.display.set_mode(size)
     self.done = False
 
-    self.player = Player((10, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 5, './assets/Koala.jpg', self.screen)
+    self.player = Player((10, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
 
   def run(self):
     while not self.done:
@@ -24,7 +24,7 @@ class Controller:
       self.update()
 
       pg.display.update()
-      CLOCK.tick(40)
+      CLOCK.tick(120)
 
     pg.display.quit()
 
