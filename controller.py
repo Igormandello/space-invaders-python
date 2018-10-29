@@ -1,5 +1,6 @@
 import pygame as pg
 from player import Player
+from shot_controller import ShotController
 
 MOVEMENTS = {
   pg.K_a: -1,
@@ -8,6 +9,7 @@ MOVEMENTS = {
 
 CLOCK = pg.time.Clock()
 PLAYER_SIZE = 50
+SHOT_SIZE = 40
 
 class Controller:
   def __init__(self, caption, size):
@@ -17,6 +19,7 @@ class Controller:
     self.done = False
 
     self.player = Player((10, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
+    self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (PLAYER_SIZE, SHOT_SIZE), 4, './assets/shot.png', self.screen)
 
   def run(self):
     while not self.done:
@@ -38,7 +41,10 @@ class Controller:
       elif event.type == pg.KEYUP:
         if event.key in MOVEMENTS:
           self.player.stop(MOVEMENTS[event.key])
+        elif event.key == pg.K_SPACE:
+          self.shot_controller.send_shot(self.player.pos[0])
 
   def update(self):
     self.screen.fill((0, 0, 0))
     self.player.update()
+    self.shot_controller.update()
