@@ -12,8 +12,8 @@ class Invader:
     self.pos = (self.pos[0] + direction[0], self.pos[1] + direction[1])
 
   def intersects(self, rect):
-    return !(rect[0] + rect[2] < self.pos[0] or rect[0] > self.pos[0] + self.size[0] or
-             rect[1] + rect[3] < self.pos[1] or rect[1] > self.pos[1] + self.size[1])
+    return not (rect[0] + rect[2] < self.pos[0] or rect[0] > self.pos[0] + self.size[0] or
+                rect[1] + rect[3] < self.pos[1] or rect[1] > self.pos[1] + self.size[1])
 
   def update(self):
     self.display.blit(self.image, self.pos)
