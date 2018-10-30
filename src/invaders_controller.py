@@ -50,7 +50,7 @@ class InvadersController:
           self.invaders[y][x].move(direction)
           self.invaders[y][x].pos = (max(-1, min(invader.pos[0], self.display_width - invader.size[0] + 1)), invader.pos[1])
 
-  def update(self):
+  def update(self, player):
     self.frame_count += 1
     for y in range(self.rows):
       for x in range(self.cols):
@@ -88,3 +88,4 @@ class InvadersController:
           break
 
     self.shot_controller.update()
+    return self.shot_controller.check_hit(player)

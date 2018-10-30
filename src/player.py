@@ -17,6 +17,10 @@ class Player:
   def stop(self, direction):
     self.horizontal = self.horizontal - direction
 
+  def check_kill(self, rect):
+    return not (rect[0] + rect[2] < self.pos[0] or rect[0] > self.pos[0] + self.size[0] or
+                rect[1] + rect[3] < self.pos[1] or rect[1] > self.pos[1] + self.size[1])
+
   def update(self):
     self.pos = (self.pos[0] + self.horizontal * self.speed, self.pos[1])
     self.pos = (max(0, min(self.pos[0], self.display_width - self.size[0])), self.pos[1])

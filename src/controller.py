@@ -54,4 +54,6 @@ class Controller:
     self.player.update()
     self.shot_controller.check_hit(self.invaders_controller)
     self.shot_controller.update()
-    self.invaders_controller.update()
+
+    if self.invaders_controller.update(self.player):
+      print('Dead')
