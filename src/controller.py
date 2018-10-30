@@ -1,7 +1,7 @@
 import pygame as pg
-from player import Player
-from shot_controller import ShotController
-from invaders_controller import InvadersController
+from src.player import Player
+from src.shot_controller import ShotController
+from src.invaders_controller import InvadersController
 
 MOVEMENTS = {
   pg.K_a: -1,
@@ -40,11 +40,11 @@ class Controller:
       elif event.type == pg.KEYDOWN:
         if event.key in MOVEMENTS:
           self.player.move(MOVEMENTS[event.key])
+        elif event.key == pg.K_SPACE:
+          self.shot_controller.send_shot(self.player.pos[0])
       elif event.type == pg.KEYUP:
         if event.key in MOVEMENTS:
           self.player.stop(MOVEMENTS[event.key])
-        elif event.key == pg.K_SPACE:
-          self.shot_controller.send_shot(self.player.pos[0])
 
   def update(self):
     self.screen.fill((0, 0, 0))

@@ -1,7 +1,7 @@
 import random
 import pygame as pg
-from invader import Invader
-from shot_controller import ShotController
+from src.invader import Invader
+from src.shot_controller import ShotController
 
 DOWN = (0, 1)
 SHOT_SIZE = 6
