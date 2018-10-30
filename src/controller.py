@@ -10,7 +10,8 @@ MOVEMENTS = {
 
 CLOCK = pg.time.Clock()
 PLAYER_SIZE = 50
-SHOT_SIZE = 10
+SHOT_WIDTH = 4
+SHOT_HEIGHT = 10
 
 class Controller:
   def __init__(self, caption, size):
@@ -20,7 +21,7 @@ class Controller:
     self.done = False
 
     self.player = Player((10, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
-    self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (PLAYER_SIZE, SHOT_SIZE), 4, './assets/shot.png', self.screen)
+    self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (SHOT_WIDTH, SHOT_HEIGHT), 8, './assets/shot.png', self.screen)
     self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 25), ['./assets/invader.png'], self.screen)
 
   def run(self):
@@ -41,7 +42,7 @@ class Controller:
         if event.key in MOVEMENTS:
           self.player.move(MOVEMENTS[event.key])
         elif event.key == pg.K_SPACE:
-          self.shot_controller.send_shot(self.player.pos[0])
+          self.shot_controller.send_shot(self.player.pos[0] + PLAYER_SIZE / 2 - SHOT_WIDTH / 2)
       elif event.type == pg.KEYUP:
         if event.key in MOVEMENTS:
           self.player.stop(MOVEMENTS[event.key])
