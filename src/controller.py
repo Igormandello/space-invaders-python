@@ -22,7 +22,7 @@ class Controller:
 
     self.player = Player((10, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
     self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (SHOT_WIDTH, SHOT_HEIGHT), 8, './assets/shot.png', self.screen)
-    self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 25), ['./assets/invader.png'], self.screen)
+    self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 25), ['./assets/invader.png', './assets/invader2.png'], self.screen)
 
   def run(self):
     while not self.done:
