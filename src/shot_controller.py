@@ -13,8 +13,14 @@ class ShotController:
     self.speed = speed
     self.shots = []
 
-  def shot_count(self):
-    return len(self.shots)
+  def check_hit(self, invaders):
+    nextShots = []
+    for i in range(len(self.shots)):
+      shot = self.shots[i]
+      if not invaders.check_kill([shot[0], shot[1], self.size[0], self.size[1]]):
+        nextShots.append(shot)
+
+    self.shots = nextShots
 
   def send_shot(self, x):
     self.shots.append((x, self.base_y))

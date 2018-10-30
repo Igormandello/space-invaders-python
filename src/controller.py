@@ -49,5 +49,6 @@ class Controller:
   def update(self):
     self.screen.fill((0, 0, 0))
     self.player.update()
+    self.shot_controller.check_hit(self.invaders_controller)
     self.shot_controller.update()
     self.invaders_controller.update()

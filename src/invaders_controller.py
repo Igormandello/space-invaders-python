@@ -24,9 +24,20 @@ class InvadersController:
 
       self.invaders.append(row)
 
+  def check_kill(self, shot):
+    for y in range(self.rows):
+      for x in range(self.cols):
+        if not self.invaders[y][x] is None:
+          if self.invaders[y][x].intersects(shot):
+            self.invaders[y][x] = None
+            return True
+
+    return False
+
   def update(self):
     for y in range(self.rows):
       for x in range(self.cols):
-        self.invaders[y][x].update()
+        if not self.invaders[y][x] is None:
+          self.invaders[y][x].update()
 
     self.shot_controller.update()
