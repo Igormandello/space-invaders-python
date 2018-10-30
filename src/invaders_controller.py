@@ -1,3 +1,4 @@
+import random
 import pygame as pg
 from src.invader import Invader
 from src.shot_controller import ShotController
@@ -5,7 +6,8 @@ from src.shot_controller import ShotController
 DOWN = (0, 1)
 LEFT = (-20, 0)
 RIGHT = (20, 0)
-SHOT_SIZE = 6
+SHOT_WIDTH = 4
+SHOT_HEIGHT = 6
 
 class InvadersController:
   def __init__(self, rows, cols, base_y, padding, size, sprites, display):
@@ -14,7 +16,7 @@ class InvadersController:
     self.base_y = base_y
     self.padding = padding
     self.size = size
-    self.shot_controller = ShotController(size[1] + base_y, (size[0], SHOT_SIZE), -3, './assets/shot.png', display)
+    self.shot_controller = ShotController(size[1] + base_y, (SHOT_WIDTH, SHOT_HEIGHT), -3, './assets/shot.png', display)
     self.frame_count = 0
     self.dir = RIGHT
     self.display_width = display.get_width()
@@ -54,6 +56,15 @@ class InvadersController:
       for x in range(self.cols):
         if not self.invaders[y][x] is None:
           self.invaders[y][x].update(self.frame_count % 40 == 0)
+
+    for x in range(self.cols):
+      for y in range(self.rows - 1, -1, -1):
+        if not self.invaders[y][x] is None:
+          if random.random() < 0.001:
+            self.shot_controller.base_y = self.invaders[y][x].pos[1] + self.size[1]
+            self.shot_controller.send_shot(self.invaders[y][x].pos[0] + self.size[0] / 2 - SHOT_WIDTH / 2)
+          
+          break
 
     if self.frame_count % (120 - self.killed * 4) == 0:
       self.frame_count = 0
