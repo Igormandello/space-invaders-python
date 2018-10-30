@@ -9,7 +9,7 @@ MOVEMENTS = {
 
 CLOCK = pg.time.Clock()
 PLAYER_SIZE = 50
-SHOT_SIZE = 40
+SHOT_SIZE = 10
 
 class Controller:
   def __init__(self, caption, size):

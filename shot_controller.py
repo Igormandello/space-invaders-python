@@ -13,6 +13,9 @@ class ShotController:
     self.speed = speed
     self.shots = []
 
+  def shot_count(self):
+    return len(self.shots)
+
   def send_shot(self, x):
     self.shots.append((x, self.base_y))
 
