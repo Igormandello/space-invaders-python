@@ -1,6 +1,7 @@
 import pygame as pg
 from player import Player
 from shot_controller import ShotController
+from invaders_controller import InvadersController
 
 MOVEMENTS = {
   pg.K_a: -1,
@@ -20,6 +21,7 @@ class Controller:
 
     self.player = Player((10, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
     self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (PLAYER_SIZE, SHOT_SIZE), 4, './assets/shot.png', self.screen)
+    self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 25), ['./assets/invader.png'], self.screen)
 
   def run(self):
     while not self.done:
@@ -48,3 +50,4 @@ class Controller:
     self.screen.fill((0, 0, 0))
     self.player.update()
     self.shot_controller.update()
+    self.invaders_controller.update()
