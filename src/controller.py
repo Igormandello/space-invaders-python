@@ -5,7 +5,9 @@ from src.invaders_controller import InvadersController
 
 MOVEMENTS = {
   pg.K_a: -1,
-  pg.K_d: 1
+  pg.K_d: 1,
+  pg.K_RIGHT: 1,
+  pg.K_LEFT: -1
 }
 
 CLOCK = pg.time.Clock()
