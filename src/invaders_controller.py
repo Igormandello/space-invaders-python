@@ -51,11 +51,13 @@ class InvadersController:
           self.invaders[y][x].pos = (max(-1, min(invader.pos[0], self.display_width - invader.size[0] + 1)), invader.pos[1])
 
   def update(self, player):
+    ratio = self.killed / (self.rows * self.cols)
+
     self.frame_count += 1
     for y in range(self.rows):
       for x in range(self.cols):
         if not self.invaders[y][x] is None:
-          self.invaders[y][x].update(self.frame_count % 40 == 0)
+          self.invaders[y][x].update(self.frame_count % (30 - int(ratio * 30)) == 0)
 
     for x in range(self.cols):
       for y in range(self.rows - 1, -1, -1):
@@ -66,7 +68,7 @@ class InvadersController:
           
           break
 
-    if self.frame_count % (120 - self.killed * 4) == 0:
+    if self.frame_count % (120 - int(ratio * 120)) == 0:
       self.frame_count = 0
 
       self.move_all(self.dir)
