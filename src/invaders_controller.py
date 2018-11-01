@@ -58,6 +58,9 @@ class InvadersController:
           self.invaders[y][x].move(direction)
           self.invaders[y][x].pos = (max(-1, min(invader.pos[0], self.display_width - invader.size[0] + 1)), invader.pos[1])
 
+  def game_end(self):
+    return self.killed == self.rows * self.cols
+
   def update(self, player):
     ratio = self.killed / (self.rows * self.cols)
 

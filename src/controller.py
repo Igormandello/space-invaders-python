@@ -29,7 +29,8 @@ class Controller:
   def run(self):
     while not self.done:
       self.treat_events()
-      self.update()
+      if not self.update():
+        self.done = True
 
       pg.display.update()
       CLOCK.tick(120)
@@ -55,7 +56,13 @@ class Controller:
     self.shot_controller.check_hit(self.invaders_controller)
     self.shot_controller.update()
 
-    if self.invaders_controller.update(self.player):
-      self.player.reset()
-      self.shot_controller.reset()
-      self.invaders_controller.reset()
+    if not self.invaders_controller.game_end():
+      if self.invaders_controller.update(self.player):
+        self.player.reset()
+        self.shot_controller.reset()
+        self.invaders_controller.reset()
+    else:
+      print('Win')
+      return False
+
+    return True
