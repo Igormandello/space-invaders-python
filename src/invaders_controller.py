@@ -7,7 +7,7 @@ DOWN = (0, 1)
 LEFT = (-20, 0)
 RIGHT = (20, 0)
 SHOT_WIDTH = 4
-SHOT_HEIGHT = 6
+SHOT_HEIGHT = 8
 
 class InvadersController:
   def __init__(self, rows, cols, base_y, padding, size, sprites, display):
@@ -16,7 +16,7 @@ class InvadersController:
     self.base_y = base_y
     self.padding = padding
     self.size = size
-    self.shot_controller = ShotController(size[1] + base_y, (SHOT_WIDTH, SHOT_HEIGHT), -3, './assets/shot.png', display)
+    self.shot_controller = ShotController(size[1] + base_y, (SHOT_WIDTH, SHOT_HEIGHT), -3, './assets/invaderShot.png', display)
     self.dir = RIGHT
     self.display_width = display.get_width()
     self.sprites = [sprites[0], sprites[1]]

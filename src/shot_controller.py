@@ -12,8 +12,10 @@ class ShotController:
     self.display_width = display.get_width()
     self.speed = speed
     self.shots = []
+    self.frame_count = 0
 
   def reset(self):
+    self.frame_count = 0
     self.shots = []
 
   def check_hit(self, target):
@@ -33,6 +35,11 @@ class ShotController:
     self.shots.append((x, self.base_y))
 
   def update(self):
+    self.frame_count += 1
+    if self.frame_count % 10 == 0:
+      self.frame_count = 0
+      self.image = pg.transform.flip(self.image, True, False)
+
     newList = []
     for i in range(len(self.shots)):
       self.shots[i] = (self.shots[i][0], self.shots[i][1] + UP[1] * self.speed)
