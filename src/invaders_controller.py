@@ -17,19 +17,26 @@ class InvadersController:
     self.padding = padding
     self.size = size
     self.shot_controller = ShotController(size[1] + base_y, (SHOT_WIDTH, SHOT_HEIGHT), -3, './assets/shot.png', display)
-    self.frame_count = 0
     self.dir = RIGHT
     self.display_width = display.get_width()
-    self.killed = 0
+    self.sprites = [sprites[0], sprites[1]]
+    self.display = display
 
+    self.reset()
+
+  def reset(self):
+    self.shot_controller.reset()
+    self.frame_count = 0
+    self.killed = 0
     self.invaders = []
     for y in range(self.rows):
       row = []
       for x in range(self.cols):
-        invader_pos = (padding[0] + x * (size[0] + padding[0]), padding[1] + y * (size[1] + padding[1]))
-        row.append(Invader(invader_pos, size, [sprites[0], sprites[1]], display))
+        invader_pos = (self.padding[0] + x * (self.size[0] + self.padding[0]), self.padding[1] + y * (self.size[1] + self.padding[1]))
+        row.append(Invader(invader_pos, self.size, self.sprites, self.display))
 
       self.invaders.append(row)
+
 
   def check_kill(self, shot):
     for y in range(self.rows):

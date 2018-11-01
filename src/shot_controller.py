@@ -13,6 +13,9 @@ class ShotController:
     self.speed = speed
     self.shots = []
 
+  def reset(self):
+    return
+
   def check_hit(self, target):
     nextShots = []
     hit = False

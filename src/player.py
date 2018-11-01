@@ -11,6 +11,9 @@ class Player:
     self.horizontal = 0
     self.speed = speed
 
+  def reset(self):
+    return
+
   def move(self, direction):
     self.horizontal = self.horizontal + direction
 
