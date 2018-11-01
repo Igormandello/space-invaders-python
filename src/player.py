@@ -7,12 +7,13 @@ class Player:
     self.size = size
     self.display = display
     self.display_width = display.get_width()
+    self.starting_pos = pos
     self.pos = pos
     self.horizontal = 0
     self.speed = speed
 
   def reset(self):
-    return
+    self.pos = self.starting_pos
 
   def move(self, direction):
     self.horizontal = self.horizontal + direction

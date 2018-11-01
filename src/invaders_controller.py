@@ -26,6 +26,7 @@ class InvadersController:
 
   def reset(self):
     self.shot_controller.reset()
+    self.dir = RIGHT
     self.frame_count = 0
     self.killed = 0
     self.invaders = []
@@ -69,7 +70,7 @@ class InvadersController:
     for x in range(self.cols):
       for y in range(self.rows - 1, -1, -1):
         if not self.invaders[y][x] is None:
-          if random.random() < 0.001:
+          if random.random() < 0.001 + ratio / 100:
             self.shot_controller.base_y = self.invaders[y][x].pos[1] + self.size[1]
             self.shot_controller.send_shot(self.invaders[y][x].pos[0] + self.size[0] / 2 - SHOT_WIDTH / 2)
           

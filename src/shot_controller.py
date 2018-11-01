@@ -14,7 +14,7 @@ class ShotController:
     self.shots = []
 
   def reset(self):
-    return
+    self.shots = []
 
   def check_hit(self, target):
     nextShots = []
