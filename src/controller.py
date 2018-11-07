@@ -1,4 +1,5 @@
 import pygame as pg
+from src.scene_controller import SceneController
 from src.player import Player
 from src.shot_controller import ShotController
 from src.invaders_controller import InvadersController
@@ -22,6 +23,7 @@ class Controller:
     self.screen = pg.display.set_mode(size)
     self.done = False
 
+    self.scene_controller = SceneController(['./assets/invader.png'], self.screen)
     self.player = Player((size[0] / 2 - PLAYER_SIZE / 2, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
     self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (SHOT_WIDTH, SHOT_HEIGHT), 8, './assets/shot.png', self.screen, 60)
     self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 25), ['./assets/invader.png', './assets/invader2.png'], self.screen)
@@ -51,7 +53,7 @@ class Controller:
           self.player.stop(MOVEMENTS[event.key])
 
   def update(self):
-    self.screen.fill((0, 0, 0))
+    self.scene_controller.update()
     self.player.update()
     self.shot_controller.check_hit(self.invaders_controller)
     self.shot_controller.update()
