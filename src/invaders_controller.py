@@ -58,6 +58,14 @@ class InvadersController:
           self.invaders[y][x].move(direction)
           self.invaders[y][x].pos = (max(-1, min(invader.pos[0], self.display_width - invader.size[0] + 1)), invader.pos[1])
 
+  def max_y(self):
+    for y in range(self.rows - 1, -1, -1):
+      for x in range(self.cols):
+        if not self.invaders[y][x] is None:
+          return self.invaders[y][x].pos[1] + self.invaders[y][x].size[1]
+
+    return 0
+
   def game_end(self):
     return self.killed == self.rows * self.cols
 

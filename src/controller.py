@@ -23,7 +23,7 @@ class Controller:
     self.done = False
 
     self.player = Player((size[0] / 2 - PLAYER_SIZE / 2, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
-    self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (SHOT_WIDTH, SHOT_HEIGHT), 8, './assets/shot.png', self.screen)
+    self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (SHOT_WIDTH, SHOT_HEIGHT), 8, './assets/shot.png', self.screen, 60)
     self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 25), ['./assets/invader.png', './assets/invader2.png'], self.screen)
 
   def run(self):
@@ -56,13 +56,16 @@ class Controller:
     self.shot_controller.check_hit(self.invaders_controller)
     self.shot_controller.update()
 
-    if not self.invaders_controller.game_end():
+    if self.invaders_controller.max_y() >= self.player.pos[1]:
+      print('Lose')
+      return False
+    elif self.invaders_controller.game_end():
+      print('Win')
+      return False
+    else:
       if self.invaders_controller.update(self.player):
         self.player.reset()
         self.shot_controller.reset()
         self.invaders_controller.reset()
-    else:
-      print('Win')
-      return False
 
     return True

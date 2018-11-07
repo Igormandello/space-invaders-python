@@ -3,7 +3,7 @@ import pygame as pg
 UP = (0, -1)
 
 class ShotController:
-  def __init__(self, base_y, size, speed, sprite, display):
+  def __init__(self, base_y, size, speed, sprite, display, delay = 20):
     self.image = pg.image.load(sprite).convert_alpha()
     self.image = pg.transform.scale(self.image, size)
     self.base_y = base_y
@@ -13,6 +13,8 @@ class ShotController:
     self.speed = speed
     self.shots = []
     self.frame_count = 0
+    self.delay = delay
+    self.cooldown = self.delay
 
   def reset(self):
     self.frame_count = 0
@@ -32,9 +34,12 @@ class ShotController:
     return hit
 
   def send_shot(self, x):
-    self.shots.append((x, self.base_y))
+    if self.cooldown <= 0:
+      self.shots.append((x, self.base_y))
+      self.cooldown = self.delay
 
   def update(self):
+    self.cooldown -= 1
     self.frame_count += 1
     if self.frame_count % 10 == 0:
       self.frame_count = 0
