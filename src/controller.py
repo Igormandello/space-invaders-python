@@ -23,10 +23,15 @@ class Controller:
     self.screen = pg.display.set_mode(size)
     self.done = False
 
-    self.scene_controller = SceneController(['./assets/invader.png'], self.screen)
+    self.scene_controller = SceneController([(0, 0, 0), (40, 40, 40), (80, 80, 80), (120, 120, 120)], self.reset, self.screen)
     self.player = Player((size[0] / 2 - PLAYER_SIZE / 2, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
     self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (SHOT_WIDTH, SHOT_HEIGHT), 8, './assets/shot.png', self.screen, 60)
     self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 25), ['./assets/invader.png', './assets/invader2.png'], self.screen)
+
+  def reset(self):
+    self.player.reset()
+    self.shot_controller.reset()
+    self.invaders_controller.reset()
 
   def run(self):
     while not self.done:
@@ -48,26 +53,26 @@ class Controller:
           self.player.move(MOVEMENTS[event.key])
         elif event.key == pg.K_SPACE:
           self.shot_controller.send_shot(self.player.pos[0] + PLAYER_SIZE / 2 - SHOT_WIDTH / 2)
+        elif event.key == pg.K_RETURN:
+          self.scene_controller.process_action()
       elif event.type == pg.KEYUP:
         if event.key in MOVEMENTS:
           self.player.stop(MOVEMENTS[event.key])
 
   def update(self):
     self.scene_controller.update()
-    self.player.update()
-    self.shot_controller.check_hit(self.invaders_controller)
-    self.shot_controller.update()
 
-    if self.invaders_controller.max_y() >= self.player.pos[1]:
-      print('Lose')
-      return False
-    elif self.invaders_controller.game_end():
-      print('Win')
-      return False
-    else:
-      if self.invaders_controller.update(self.player):
-        self.player.reset()
-        self.shot_controller.reset()
-        self.invaders_controller.reset()
+    if self.scene_controller.in_game():
+      self.player.update()
+      self.shot_controller.check_hit(self.invaders_controller)
+      self.shot_controller.update()
+
+      if self.invaders_controller.max_y() >= self.player.pos[1]:
+        self.scene_controller.lose()
+      elif self.invaders_controller.game_end():
+        self.scene_controller.win()
+      else:
+        if self.invaders_controller.update(self.player):
+          self.scene_controller.lose()
 
     return True
