@@ -52,7 +52,7 @@ class SceneController:
     elif type(self.backgrounds[self.current]) == pg.Surface:
       self.display.blit(self.backgrounds[self.current], (0, 0))
     elif type(self.backgrounds[self.current]) == list:
-      if self.frame % 100 == 0:
+      if self.frame % 80 == 0:
         self.frame = 0
         self.index += 1
         if self.index > 1:
