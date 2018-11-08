@@ -29,7 +29,7 @@ class Controller:
     icon = pg.image.load(icon)
     pg.display.set_icon(icon)
 
-    self.scene_controller = SceneController([['./assets/initialScreen1.png', './assets/initialScreen2.png'], (0, 0, 0), ['./assets/endScreen1.png', './assets/endScreen2.png'], ['./assets/endScreen1.png', './assets/endScreen2.png']], self.reset, self.screen)
+    self.scene_controller = SceneController([['./assets/initialScreen1.png', './assets/initialScreen2.png'], (0, 0, 0), ['./assets/victoryScreen1.png', './assets/victoryScreen2.png'], ['./assets/endScreen1.png', './assets/endScreen2.png']], self.reset, self.screen)
     self.player = Player((size[0] / 2 - PLAYER_SIZE / 2, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
     self.shot_controller = ShotController(size[1] - PLAYER_SIZE * 5 / 4, (SHOT_WIDTH, SHOT_HEIGHT), 8, './assets/shot.png', self.screen, 60)
 
@@ -48,7 +48,7 @@ class Controller:
         './assets/invader32.png'
       ]
     ]
-    self.invaders_controller = InvadersController(4, 7, 30, (30, 20), (34, 34), invadersSprites, self.screen)
+    self.invaders_controller = InvadersController(1, 7, 30, (30, 20), (34, 34), invadersSprites, self.screen)
     self.score = 0
 
   def reset(self):
