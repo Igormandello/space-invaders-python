@@ -29,6 +29,7 @@ class InvadersController:
     self.dir = RIGHT
     self.frame_count = 0
     self.killed = 0
+    self.current_music = 0
     self.invaders = []
     for y in range(self.rows):
       row = []

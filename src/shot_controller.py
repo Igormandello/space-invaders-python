@@ -3,7 +3,7 @@ import pygame as pg
 UP = (0, -1)
 
 class ShotController:
-  def __init__(self, base_y, size, speed, sprite, display, delay = 20):
+  def __init__(self, base_y, size, speed, sprite, display, delay = 20, sound = ''):
     self.image = pg.image.load(sprite).convert_alpha()
     self.image = pg.transform.scale(self.image, size)
     self.base_y = base_y
@@ -15,6 +15,10 @@ class ShotController:
     self.frame_count = 0
     self.delay = delay
     self.cooldown = self.delay
+    self.shot_sound = None
+
+    if sound != '':
+      self.shot_sound = pg.mixer.Sound(sound)
 
   def reset(self):
     self.frame_count = 0
@@ -35,6 +39,9 @@ class ShotController:
 
   def send_shot(self, x):
     if self.cooldown <= 0:
+      if not self.shot_sound is None:
+        self.shot_sound.play()
+        
       self.shots.append((x, self.base_y))
       self.cooldown = self.delay
 
