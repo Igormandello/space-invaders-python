@@ -21,7 +21,8 @@ class InvadersController:
     self.display_width = display.get_width()
     self.sprites = sprites
     self.display = display
-    
+    self.kill_sound = pg.mixer.Sound('./sounds/explosion.wav')
+
     self.reset()
 
   def reset(self):
@@ -29,7 +30,6 @@ class InvadersController:
     self.dir = RIGHT
     self.frame_count = 0
     self.killed = 0
-    self.current_music = 0
     self.invaders = []
     for y in range(self.rows):
       row = []
@@ -47,6 +47,7 @@ class InvadersController:
           if self.invaders[y][x].intersects(shot):
             self.invaders[y][x] = None
             self.killed += 1
+            self.kill_sound.play()
             return True
 
     return False
