@@ -18,6 +18,7 @@ SHOT_HEIGHT = 10
 
 class Controller:
   def __init__(self, caption, icon, size):
+    pg.mixer.init(frequency=22050)
     pg.init()
     pg.font.init()
     pg.display.set_caption(caption)
@@ -48,7 +49,7 @@ class Controller:
         './assets/invader32.png'
       ]
     ]
-    self.invaders_controller = InvadersController(1, 7, 30, (30, 20), (34, 34), invadersSprites, self.screen)
+    self.invaders_controller = InvadersController(4, 7, 30, (30, 20), (34, 34), invadersSprites, self.screen)
     self.score = 0
 
   def reset(self):

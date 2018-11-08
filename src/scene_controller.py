@@ -25,23 +25,29 @@ class SceneController:
     self.frame = 0
     self.index = 0
 
+    self.background_sound = pg.mixer.Sound('./sounds/bg.wav')
+
   def in_game(self):
     return self.current == 1
 
   def process_action(self): 
     if self.current > 1:
+      self.background_sound.play(-1)
       self.current = 1
       self.frame = 0
       self.reset()
     elif self.current == 0:
+      self.background_sound.play(-1)
       self.current = 1
       self.frame = 0
 
   def win(self):
+    self.background_sound.stop()
     self.current = 2
     self.frame = 0
 
   def lose(self):
+    self.background_sound.stop()
     self.current = 3
     self.frame = 0
 

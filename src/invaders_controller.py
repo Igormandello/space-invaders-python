@@ -21,7 +21,7 @@ class InvadersController:
     self.display_width = display.get_width()
     self.sprites = sprites
     self.display = display
-
+    
     self.reset()
 
   def reset(self):
@@ -89,7 +89,6 @@ class InvadersController:
 
     if self.frame_count % (120 - int(ratio * 120)) == 0:
       self.frame_count = 0
-
       self.move_all(self.dir)
 
       for y in range(self.rows):
