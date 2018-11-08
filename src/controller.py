@@ -77,7 +77,8 @@ class Controller:
         if event.key in MOVEMENTS:
           self.player.move(MOVEMENTS[event.key])
         elif event.key == pg.K_SPACE:
-          self.shot_controller.send_shot(self.player.pos[0] + PLAYER_SIZE / 2 - SHOT_WIDTH / 2)
+          if self.scene_controller.in_game():
+            self.shot_controller.send_shot(self.player.pos[0] + PLAYER_SIZE / 2 - SHOT_WIDTH / 2)
         elif event.key == pg.K_RETURN:
           self.scene_controller.process_action()
       elif event.type == pg.KEYUP:
