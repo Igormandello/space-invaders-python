@@ -17,11 +17,15 @@ SHOT_WIDTH = 4
 SHOT_HEIGHT = 10
 
 class Controller:
-  def __init__(self, caption, size):
+  def __init__(self, caption, icon, size):
     pg.init()
     pg.display.set_caption(caption)
+
     self.screen = pg.display.set_mode(size)
     self.done = False
+
+    icon = pg.image.load(icon)
+    pg.display.set_icon(icon)
 
     self.scene_controller = SceneController([['./assets/initialScreen1.png', './assets/initialScreen2.png'], (0, 0, 0), (120, 120, 120), ['./assets/endScreen1.png', './assets/endScreen2.png']], self.reset, self.screen)
     self.player = Player((size[0] / 2 - PLAYER_SIZE / 2, size[1] - PLAYER_SIZE * 5 / 4), (PLAYER_SIZE, PLAYER_SIZE), 3, './assets/player.png', self.screen)
