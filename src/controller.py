@@ -19,10 +19,12 @@ SHOT_HEIGHT = 10
 class Controller:
   def __init__(self, caption, icon, size):
     pg.init()
+    pg.font.init()
     pg.display.set_caption(caption)
 
     self.screen = pg.display.set_mode(size)
     self.done = False
+    self.font = pg.font.Font('./assets/arcade.ttf', 20)
 
     icon = pg.image.load(icon)
     pg.display.set_icon(icon)
@@ -46,9 +48,11 @@ class Controller:
         './assets/invader32.png'
       ]
     ]
-    self.invaders_controller = InvadersController(4, 7, 10, (30, 20), (34, 34), invadersSprites, self.screen)
+    self.invaders_controller = InvadersController(4, 7, 30, (30, 20), (34, 34), invadersSprites, self.screen)
+    self.score = 0
 
   def reset(self):
+    self.score = 0
     self.player.reset()
     self.shot_controller.reset()
     self.invaders_controller.reset()
@@ -83,8 +87,11 @@ class Controller:
     self.scene_controller.update()
 
     if self.scene_controller.in_game():
+      self.screen.blit(self.font.render('SCORE:' + str(self.score), True, (255, 255, 255)), (10, 10))
+
       self.player.update()
-      self.shot_controller.check_hit(self.invaders_controller)
+      if self.shot_controller.check_hit(self.invaders_controller):
+        self.score += 100
       self.shot_controller.update()
 
       if self.invaders_controller.max_y() >= self.player.pos[1]:

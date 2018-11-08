@@ -33,7 +33,7 @@ class InvadersController:
     for y in range(self.rows):
       row = []
       for x in range(self.cols):
-        invader_pos = (self.padding[0] + x * (self.size[0] + self.padding[0]), self.padding[1] + y * (self.size[1] + self.padding[1]))
+        invader_pos = (self.padding[0] + x * (self.size[0] + self.padding[0]), self.padding[1] + y * (self.size[1] + self.padding[1]) + self.base_y)
         row.append(Invader(invader_pos, self.size, self.sprites[y], self.display))
 
       self.invaders.append(row)
